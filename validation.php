@@ -13,9 +13,9 @@ include_once "db_conn.php";
 // 		die ("Connection failed: " . mysqli_connect_error());
 // 	}
 
+
 $name = $_POST['user'];
 $password = $_POST['password'];
-
    
 $sql = "SELECT * from users WHERE username = '$name' && password = '$password'";
 $result = mysqli_query($conn, $sql);

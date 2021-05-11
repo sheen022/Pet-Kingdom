@@ -1,4 +1,32 @@
 <!-- <?php 
+function uidExists($conn, $username, $password){
+    $err;
+    $sql="SELECT * FROM `users` 
+           WHERE ( `username`= ? 
+             OR `emailadd` = ? )
+             AND `password` = ?
+          ;";
+    $stmt=mysqli_stmt_init($conn);
+    
+    if (!mysqli_stmt_prepare($stmt, $sql)){
+        header("location: index.php?error=stmtfailed");
+        exit();
+    }
+        mysqli_stmt_bind_param($stmt, "sss" ,$username,$username,$password);
+        mysqli_stmt_execute($stmt);
+        
+        $resultData = mysqli_stmt_get_result($stmt);
+        
+        if($row = mysqli_fetch_assoc($resultData)){
+            return $row;
+        }
+        else{
+            $err=false;
+            return $err;
+        }
+        mysql_stmt_close($stmt);
+}
+
 
 function setisEmpty(){
    $bool_empty = false;
@@ -146,9 +174,6 @@ function fullDisplay($conn){
         return $arr;               //this is the return value
         mysqli_stmt_close($stmt);  //close the mysqli_statement
 }
-
-
-
 
 
  ?> -->
