@@ -25,7 +25,8 @@ $result = mysqli_query($conn, $sql);
 $num = mysqli_num_rows($result);
 	
 	if ($num == 1){
-		echo "Username Already Taken";
+		echo $_SESSION['username'] = $name;
+		header('location:home.php');
 	}else{
 		$reg = "INSERT into users (username, password) VALUES ('$name', '$password')";
 		mysqli_query($conn, $reg);
